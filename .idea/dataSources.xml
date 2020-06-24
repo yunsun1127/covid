@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="f467ffd8-7cb0-445a-b3d8-278ac4a3497f">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\yunsu\Desktop\yuun._.ii\HY\3학년\5_데이터 시각화\h_chart\db.sqlite3</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="db.sqlite3" uuid="da5639a5-0beb-410d-8432-369f9d4bb1b7">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>

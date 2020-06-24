@@ -1,4 +1,4 @@
-# chart/modles.py
+# chart/models.py
 from django.db import models
 
 class Passenger(models.Model):  # 승객 모델

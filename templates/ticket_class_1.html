@@ -9,37 +9,96 @@
   <a href="{% url 'home' %}">Return to homepage</a>
   <div id="container"></div>
   <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script>
     Highcharts.chart('container', {
         chart: {
-            type: 'column'
+            zoomType: 'xy',
+            borderColor: "#D5C2EE",
+            borderWidth: 3,
         },
         title: {
-            text: 'Titanic Survivors by Ticket Class'
+            text: '좌석 등급에 따른 타이타닉 생존/비 생존 인원 및 생존율'
         },
-        xAxis: {
+        xAxis: [{
             categories: [
               {% for entry in dataset %}
-                '{{ entry.ticket_class }} Class'{% if not forloop.last %}, {% endif %}
+                '{{ entry.ticket_class }} 등석'{% if not forloop.last %}, {% endif %}
               {% endfor %}
             ]
+        }],
+        yAxis: [{ // Primary yAxis
+          labels: {
+            format: "{value} %",
+            style: {
+              color: "blue"
+            }
+          },
+          title: {
+            text: "생존율",
+            style: {
+              color: "blue"
+            }
+          }
+        }, { // Secondary yAxis
+            labels: {
+              format: "{value} 명",
+              style: {
+                color: "black"
+              }
+            },
+            title: {
+              text: "인원",
+              style: {
+                color: "black"
+              }
+            },
+            opposite: "true"
+        }],
+        tooltip:  {
+          shared: "true"
+        },
+        legend: {
+          layout: "vertical",
+          align: "left",
+          x: 120,
+          verticalAlign: "top",
+          y: 100,
+          floating: "true"
         },
         series: [{
-            name: 'Survived',
+            name: '생존',
+            type: "column",
+            yAxis: 1,
             data: [
               {% for entry in dataset %}
                 {{ entry.survived_count }}{% if not forloop.last %}, {% endif %}
               {% endfor %}
             ],
-            color: 'green'
+            color: "#5F87E1",
+            tooltip: {
+              valueSuffix: " 명"
+            }
         }, {
-            name: 'Not survived',
+            name: '비 생존',
+            type: "column",
+            yAxis: 1,
+            color: '#CD426B',
             data: [
               {% for entry in dataset %}
                 {{ entry.not_survived_count }}{% if not forloop.last %}, {% endif %}
               {% endfor %}
             ],
-            color: 'red'
+            tooltip: {
+              valueSuffix: " 명"
+            }
+        }, {
+            name: '생존율',
+            type: "spline",
+            data: {{ survived_rate }},
+            tooltip: {
+              valueSuffix: " %"
+            }
         }]
     });
   </script>

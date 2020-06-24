@@ -1,0 +1,89 @@
+<!--templates/ticket_class_1.html-->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Highcharts Example</title>
+</head>
+<body>
+  <a href="{% url 'home' %}">Return to homepage</a>
+  <div id="container"></div>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'spline',
+            borderColor: "#D5C2EE",
+            borderWidth: 3,
+        },
+        title: {
+          text: "COVID-19 확진자 발생율"
+        },
+        subtitle: {
+            text: 'For the USA, United Kingdom, France, Germany, and Korea, South'
+        },
+        xAxis: {
+          type: "datetime",
+          labels: {
+            format: '{value:%e. %b}'
+          },
+        },
+        yAxis: [{
+          labels: {
+            format: "{value} 건/백만 명",
+            style: {
+              color: "blue"
+            }
+          },
+          title: {
+            text: "합계 건수",
+            style: {
+              color: "blue"
+            }
+          }
+        }],
+        tooltip: {
+          xDateFormat: '%A, %b %e, %Y',
+          valueSuffix: '',
+        },
+        plotOptions: {
+          spline: {
+            lineWidth: 3,
+            states: {
+              hover: {
+                lineWidth: 5
+              }
+            }
+          }
+        },
+        series: [{
+            name: 'US',
+            data: {{ us|safe }}
+        },{
+            name: 'United Kingdom',
+            data: {{ uk|safe }}
+        },{
+            name: 'France',
+            data: {{ france|safe }}
+        }, {
+            name: 'Germany',
+            data: {{ germany|safe }}
+        },{
+            name: 'Korea, South',
+            data:
+              {{ korea|safe }}
+          }],
+          navigation: {
+            menuItemStyle: {
+              fontSize: "10px"
+            }
+          }
+    });
+  </script>
+</body>
+</html>
