@@ -11,7 +11,7 @@ def home(request):
     return render(request, 'home.html')
 
 def covid(request):
-    df = pd.read_csv('/Users/yunsu/PythonProjects/h_chart/covid.csv', parse_dates=['Date'])
+    df = pd.read_csv('covid.csv', parse_dates=['Date'])
     countries = ['Korea, South', 'Germany', 'United Kingdom', 'US', 'France']
     df = df[df['Country'].isin(countries)]
     df = df.pivot(index='Date', columns='Country', values='Confirmed')
@@ -108,7 +108,7 @@ def covid(request):
     })
 
 def covid19(request):
-    df = pd.read_csv('/Users/yunsu/PythonProjects/h_chart/covid.csv', parse_dates=['Date'])
+    df = pd.read_csv('covid.csv', parse_dates=['Date'])
     countries = ['Korea, South', 'Germany', 'United Kingdom', 'US', 'France']
     df = df[df['Country'].isin(countries)]
     df['Cases'] = df[['Confirmed', 'Recovered', 'Deaths']].sum(axis=1)
