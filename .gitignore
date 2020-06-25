@@ -2,6 +2,5 @@
 *~
 __pycache__
 *.zip
-/static
 .DS_Store
 .idea
